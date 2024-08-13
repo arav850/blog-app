@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 // import { ToastrService } from 'ngx-toastr';
 import { Article } from '../../models/Article.model';
 import { ArticleService } from '../../services/articleService.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-createarticle',
@@ -15,7 +16,8 @@ export class CreatearticleComponent {
   articleData: Article = new Article();
   selectedCategory: string | null = null;
   constructor(
-    public articleService: ArticleService // public toastr: ToastrService
+    public articleService: ArticleService, // public toastr: ToastrService
+    public router: Router
   ) {}
 
   createArticle() {
@@ -25,7 +27,7 @@ export class CreatearticleComponent {
       next: (article) => {
         // this.toastr.success('Article Created Success');
         // console.log(article);
-        //this.router.navigate(['login']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         // Handle error here

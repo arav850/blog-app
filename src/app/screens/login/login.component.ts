@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.Service';
+import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../models/user.model';
 
