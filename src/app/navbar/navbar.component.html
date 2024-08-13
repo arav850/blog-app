@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div>
+            <a class="navbar-brand" href="/">Blog App</a>
+            <a class="nav-discover" href="/discover">Discover</a>
+
+        </div>
+
+        <!-- Responsive button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Search bar centered -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <div class="d-flex">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input [(ngModel)]="searchText" type="search" id="form1" class="form-control"
+                            placeholder="Search..." />
+                    </div>
+                    <button (click)="onSearch()" type="button" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/createarticle">Create Article</a>
+                </li>
+                <li *ngIf="userRole === 'Seller'" class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/createpost">CreatePost</a>
+                </li>
+                <li *ngIf="!userRole" class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/login">Login</a>
+                </li>
+                <li *ngIf="!userRole" class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/register">Register</a>
+                </li>
+
+            </ul>
+            <div class="btn-group">
+                <button *ngIf="userName" class="btn btn-secondary btn-no-style dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Hi {{userName}}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/myfavourites">Favorites</a></li>
+                    <li><a *ngIf="userRole" (click)="logout()" class="dropdown-item">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

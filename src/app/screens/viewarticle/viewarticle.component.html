@@ -1,0 +1,60 @@
+<div class="about_section layout_padding ">
+    <div class="view_article">
+        <div>
+            <span class="badge rounded-pill text-bg-light" style="border:1px solid black">Popular</span>
+            <span class="badge rounded-pill text-bg-dark">{{article?.category}}</span>
+        </div>
+        <div class="d-flex align-items-center">
+            <img src="..." alt="..." class="mr-3"> <!-- Image/Icon -->
+            <div>
+                <h6 class="mb-0">Benjamin Foster</h6>
+                <small class="text-muted">4 min read</small>
+            </div>
+            <a href="#" class="ml-auto">Follow</a>
+        </div>
+
+        <div class="about_img" style="width: 100%;">
+            <img [src]="article?.image" class="img-fluid" alt="Article image">
+        </div>
+        <div class="like_icon">
+            <img src="images/like-icon.png" alt="Like Icon">
+        </div>
+        <p class="post_text">Post By : {{ article?.publishDate }}</p>
+        <!-- <h2 class="most_text">{{ article.title }}</h2> -->
+        <p class="lorem_text">
+            <!-- {{ article.description | slice:0:100 }}... -->
+            <!-- <a [routerLink]="['/article', article.id]">Read More</a> -->
+        </p>
+        <div class="flex-jcs">
+            <div class="read_bt">
+                <!-- <p>Views: {{ article.views }}</p> -->
+            </div>
+            <div class="read_bt">
+                <!-- <p>Comments: {{ article.comments.length }}</p> -->
+            </div>
+            <div class="read_bt">
+                <p>Save</p>
+            </div>
+            <div class="read_bt">
+                <!-- <p>{{ article.authorName }}</p> -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h3>Recommended for you</h3>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img [src]="article?.image" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+        <div style="margin-bottom: 40px;"></div>
+    </div>
+
+</div>

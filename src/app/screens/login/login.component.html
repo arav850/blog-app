@@ -1,0 +1,72 @@
+<div class="logincontainer">
+    <form #form="ngForm" (ngSubmit)="loginForm()">
+        <div class="logininnercontainer">
+            <div class="mb-3">
+                <h4 style="margin-bottom: 20px ;">Enter Your Credentials</h4>
+            </div>
+            <!-- <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email </label>
+                <input #email="ngModel" [(ngModel)]="loginObj.email" name="email" type="email" class="form-control"
+                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" id="exampleFormControlInput1"
+                    placeholder="name@example.com" required>
+                <div class="text-danger">
+                    @if ((email.touched || email.dirty) && email.errors?.['required']){
+                    <span>*required</span>
+                    }
+                    @else if (email.errors?.['pattern']){
+                    <span>enter valid email address</span>
+                    }
+                </div>
+            </div> -->
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input #email="ngModel" [(ngModel)]="userDetails.email" name="email" type="email" required
+                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" class="form-control"
+                    id="exampleFormControlInput1" placeholder="name@example.com">
+
+                <div class="text-danger">
+                    @if ((email.touched || email.dirty) && email.errors?.['required']){
+                    <span>*required</span>
+                    }
+                    @else if (email.errors?.['pattern']){
+                    <span>Please enter a valid email address. </span>
+                    }
+                </div>
+            </div>
+            <!-- <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleFormControlInput2    ">
+            </div> -->
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Password</label>
+                <input type="password" #password="ngModel" minlength="5" [(ngModel)]="userDetails.password"
+                    name="password" required class="form-control" id="exampleFormControlInput2">
+
+                <div class="text-danger">
+                    @if ((password.touched || password.dirty) && email.errors?.['required']){
+                    <span>*required</span>
+                    }
+
+                </div>
+            </div>
+            <div class="col-12 loginbtn" style="display:flex;justify-content: center;">
+                <button [disabled]="!form.valid || form.untouched" class="btn btn-primary" style="width: 150px;"
+                    type="submit">Login</button>
+            </div>
+            <div class="col-12" style="display:flex">
+                <p>New User? </p>
+                &nbsp;&nbsp;<a href="/register" style="color:#0085fc; text-decoration:none">Register</a>
+            </div>
+        </div>
+
+    </form>
+    <div class="col-12" style="display: flex;">
+        <button (click)="googleSignIn()" id="google-login-button" class="btn btn-primary" style="width: 150px;"
+            type="submit">
+            Google SignIn
+        </button>
+
+
+
+    </div>
+</div>

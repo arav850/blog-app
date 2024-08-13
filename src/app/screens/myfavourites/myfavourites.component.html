@@ -1,0 +1,37 @@
+<div>
+    <div class="menu">
+        <div *ngIf="postsFound == false" style="display: flex;justify-content:center;margin-top:200px;">
+            No favourites found,
+            Please add to favourites
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="posts.length > 0">
+            <div class="col" *ngFor="let post of posts">
+                <div class="card" style="width: 20rem;">
+                    <div class="preview-pic tab-content">
+                    </div>
+                    <ul class="preview-thumbnail nav nav-tabs">
+                        <li *ngFor="let image of post?.images; let i = index" [class.active]="i === 0">
+                            <a [attr.data-target]="'#pic-' + (i + 1)" data-toggle="tab">
+                                <img style="height: 250px;width:317px" [src]="image.url" alt="Image {{ i + 1 }}">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.description }}</p>
+                        <div style="display: flex; justify-content: center;">
+                            <div>
+                                <a (click)="viewDetails(post.id)" class="btn btn-primary">View Details</a>
+                            </div>
+                            <!-- <div>
+                                                                    <a class="btn btn-primary">Mark as Favorite</a>
+                                                                </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,28 @@
+<div class="about_section layout_padding" *ngFor="let article of articles">
+    <div class="about_img" style="width: 100%;">
+        <img [src]="article.thumbnail" class="img-fluid" alt="Article Thumbnail" (click)="onThumbnailClick(article.id)">
+    </div>
+    <div class="like_icon">
+        <img src="images/like-icon.png" alt="Like Icon">
+    </div>
+    <p class="post_text">Post By : {{ article.publishDate | date }}</p>
+    <h2 class="most_text">{{ article.title }}</h2>
+    <p class="lorem_text">
+        {{ article.description | slice:0:100 }}...
+        <a [routerLink]="['/viewarticle', article.id]">Read More</a>
+    </p>
+    <div class="flex-jcs">
+        <div class="read_bt">
+            <!-- <p>Views: {{ article.views }}</p> -->
+        </div>
+        <div class="read_bt">
+            <!-- <p>Comments: {{ article.comments.length }}</p> -->
+        </div>
+        <div class="read_bt">
+            <p>Save</p>
+        </div>
+        <div class="read_bt">
+            <p>{{ article.authorName }}</p>
+        </div>
+    </div>
+</div>

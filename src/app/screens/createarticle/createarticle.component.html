@@ -1,0 +1,58 @@
+<div>
+    <div class="article-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-sm-12">
+                    <div class="about_section layout_padding">
+                        <span class="border border-light"></span>
+                        <form #form="ngForm" (ngSubmit)="createArticle()" class="article-form">
+                            <div class="article-form-elements">
+                                <div class="article-thumbnail">
+                                    <label for="thumbnail">Thumbnail</label>
+                                    <input type="file" id="thumbnail" (change)="onThumbnailSelected($event)">
+                                </div>
+                                <div class="article-title">
+                                    <input type="text" name="title" ngModel [(ngModel)]="articleData.title"
+                                        placeholder="My First Article" required>
+                                </div>
+                                <div class="flex-jcs">
+                                    <div class="btn-group">
+                                        <select class="form-select" (change)="onCategoryChange($event)">
+                                            <option value="" disabled selected>Select Category</option>
+                                            <option value="sports">Sports</option>
+                                            <option value="gym">Gym</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="article-description">
+                                    <input type="text" name="description" ngModel [(ngModel)]="articleData.description"
+                                        placeholder="Description">
+                                </div>
+                                <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+
+
+                                    <label for="thumbnail">Add Image</label>
+                                    <input type="file" id="thumbnail" (change)="onImageSelected($event)">
+                                </div>
+                                <div style="display: flex; justify-content:space-between">
+
+                                    <div style="display: flex; justify-content: center; margin-bottom: 70px;">
+                                        <button class="btn btn-primary" type="submit">Save Draft</button>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; margin-bottom: 70px;">
+                                        <button class="btn btn-primary" type="submit">Publish</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

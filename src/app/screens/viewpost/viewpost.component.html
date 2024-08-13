@@ -1,0 +1,158 @@
+<div *ngIf="post">
+    <div class="container">
+        <div class="card">
+            <div class="container-fluid">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane" *ngFor="let image of post?.images; let i = index"
+                                [class.active]="i === 0" [attr.id]="'pic-' + (i + 1)">
+                                <img [src]="image.url" alt="Image {{ i + 1 }}" />
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Expected Rent</h4>
+                            <p class="product-description">$ {{ post.expectedRent }}</p>
+                        </div>
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">{{ post.title }}</h3>
+                        <div class="rating">
+                            <!-- <div class="stars">
+                                    <span *ngFor="let star of [1, 2, 3, 4, 5]" class="fa fa-star"
+                                        [class.checked]="star <= post?.rating"></span>
+                                </div> -->
+                        </div>
+                        <div class="flexclass ">
+                            <div>
+                                <h4>Description</h4>
+                                <p class="product-description">{{ post.description }}</p>
+                            </div>
+
+                        </div>
+                        <div class="flexclass ">
+                            <div>
+                                <h4>Type</h4>
+                                <p class="product-description">{{ post.apartment }}</p>
+                            </div>
+                            <div>
+                                <h4> Address</h4>
+                                <p class="product-description">{{ post.streetAddress }}</p>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="flexclass ">
+                            <div>
+                                <h4>Square Feet</h4>
+                                <p class="product-description">{{ post.squareFeet }}</p>
+                            </div>
+                            <div>
+                                <h4>Lease Type</h4>
+                                <p class="product-description">{{ post.leaseType }}</p>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                        <div>
+                            <h4>Amenities</h4>
+                            <div *ngIf="availableAmenities">
+                                <table class="table table-bordered equal-width-table">
+                                    <tbody>
+                                        <tr *ngFor="let amenity of availableAmenities">
+                                            <td>{{ amenity?.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="!availableAmenities">No Amenities Provided</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- comments -->
+
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="d-flex flex-column col-md-8">
+                <h4>Comments</h4>
+                <div class="coment-bottom bg-white p-2 px-4">
+                    <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                        <img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/qdiP4DB.jpg"
+                            width="38" />&nbsp;
+                        <input type="text" #text="ngModel" [(ngModel)]="newComment.text" name="text"
+                            class="form-control mr-3" placeholder="Add comment" />
+                        &nbsp;<button (click)="addComment()" class="btn btn-primary" type="button">
+                            Comment
+                        </button>
+
+                    </div>
+                    <div *ngIf="comments">
+                        <div class="commented-section mt-2" *ngFor="let comment of comments; let i = index">
+                            <div>
+                                <div class="d-flex flex-row align-items-center commented-user">
+                                    <h5 class="mr-2">{{ comment.author }}</h5>
+                                </div>
+                                <div class="comment-text-sm">
+                                    <span>{{ comment.text }}</span>
+                                </div>
+                                <div class="reply-section">
+                                    <div class="d-flex flex-row align-items-center voting-icons">
+                                        <i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i>
+                                        <i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i>
+                                        <!-- <h6 class="ml-2 mt-1" (click)="toggleReplies(i)">Reply</h6> -->
+                                        <!-- Add click handler -->
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div *ngIf="showReplies[i]" class="replies-section">
+                                <!-- Conditionally show replies -->
+                                <div *ngFor="let reply of comment.replies" class="comments-reply-section">
+                                    <div class="d-flex flex-row align-items-center commented-user">
+                                        <h5 class="mr-2">{{ reply.author }}</h5>
+                                    </div>
+                                    <div class="comment-text-sm">
+                                        <span>{{ reply.text }}</span>
+                                    </div>
+                                    <div class="reply-section">
+                                        <div class="d-flex flex-row align-items-center voting-icons">
+                                            <i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i>
+                                            <i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i>
+                                            <h6 class="ml-2 mt-1" (click)="toggleReplyInput(i)">Reply</h6>
+                                            <!-- Add click handler -->
+                                        </div>
+                                        <hr />
+                                    </div>
+                                    <div *ngIf="replyInputVisible[i]" class="reply-input-section">
+                                        <input type="text" [(ngModel)]="replyText[i]" placeholder="Write a reply..." />
+                                        <button (click)="addReply(comment, i)" class="btn btn-primary">Submit
+                                            Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div>
+                <!-- <div *ngif="!isUserLogin" class="checkuser">
+                    <p>Login to View Comments</p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</div>

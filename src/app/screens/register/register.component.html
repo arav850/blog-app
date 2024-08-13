@@ -1,0 +1,92 @@
+<div class="logincontainer" style="margin-bottom: 40px;">
+    <!-- templateform -->
+    <form #form="ngForm" (ngSubmit)="submitForm()">
+        <div class="logininnercontainer">
+            <div class="mb-3">
+                <h4 style="margin-bottom: 20px;">Register</h4>
+            </div>
+            <!-- FullName -->
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" #fullName="ngModel" [(ngModel)]="userDetails.fullName" name="fullName"
+                    class="form-control" required minlength="3" id="exampleFormControlInput1">
+
+                <div class="text-danger">
+                    @if ((fullName.touched || fullName.dirty) && fullName.errors?.['required']){
+                    <span>*required</span>
+                    }
+                    @else if (fullName.errors?.['minlength']){
+                    <span>minlength required is 3 characters</span>
+                    }
+                </div>
+            </div>
+            <!-- userrole -->
+            <div class="mb-3">
+                <label class="form-label">Register as</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="sharedYes" required name="Flat/building Seller"
+                        [(ngModel)]="userDetails.role" [value]="'Seller'" />
+                    <label class="form-check-label" for="sharedYes">Flat/building Seller</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="sharedNo" required name="Flat/building Buyer"
+                        [(ngModel)]="userDetails.role" [value]="'Buyer'" />
+                    <label class="form-check-label" for="sharedNo">Flat/building Buyer</label>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Email</label>
+                <input type="email" #email="ngModel" [(ngModel)]="userDetails.email" name="email" required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="form-control"
+                    id="exampleFormControlInput2" placeholder="name@example.com">
+
+                <div class="text-danger">
+                    @if ((email.touched || email.dirty) && email.errors?.['reqired']){
+                    <span>*required</span>
+                    }
+                    @else if (email.errors?.['pattern']){
+                    <span>Please enter a valid email address. </span>
+                    }
+                </div>
+            </div>
+
+
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Password</label>
+                <input type="password" #password="ngModel" [(ngModel)]="userDetails.password" name="password" required
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$" minlength="5" class="form-control"
+                    id="exampleFormControlInput3">
+
+                <div class="text-danger">
+                    @if ((password.touched || password.dirty) && email.errors?.['required']){
+                    <span>*required</span>
+                    }
+                    @else if (password.errors?.['pattern']){
+                    <span>Please enter strong password. </span>
+                    }
+                </div>
+            </div>
+
+            <!-- Reset & Submit -->
+            <div class="col-12 loginbtn" style="display: flex; justify-content: space-between;">
+                <button (click)="resetForm()" class="btn btn-danger" style="width: 150px;" type="reset">
+                    Reset
+                </button>
+                <button class="btn btn-primary" style="width: 150px;" type="submit"
+                    [disabled]="!form.valid || form.untouched">
+                    Register
+                </button>
+            </div>
+            <div class="col-12" style="display: flex;">
+                <p>Already have an account?</p>
+                &nbsp;&nbsp;<a href="/login" style="color: #0085fc; text-decoration: none;">Login</a>
+            </div>
+
+        </div>
+    </form>
+
+</div>

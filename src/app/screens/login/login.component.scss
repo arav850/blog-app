@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+}
+
+.logincontainer {
+    background-color: rgb(245, 240, 244);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 5%;
+    height: 100vh;
+}
+
+.logininnercontainer {
+    border-radius: 15px;
+    margin: 0 auto;
+    color: rgb(76, 76, 76);
+    padding: 3% 10%;
+    background-color: rgb(255, 255, 255);
+    max-width: 550px;
+}
+
+.loginbtn {
+    margin-bottom: 15px;
+}
+
+.logininnercontainer input {
+    border: 1px solid rgb(100, 100, 100);
+
+}
+
+.logininnercontainer label {
+    margin-bottom: 8px;
+}

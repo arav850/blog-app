@@ -1,0 +1,31 @@
+ .btn-no-style {
+     background-color: transparent;
+     border: none;
+     color: #ffff;
+     /* Inherit color from parent or surrounding text */
+     padding: 0;
+     margin: 0;
+     font: inherit;
+     /* Inherit font styles */
+     cursor: pointer;
+     outline: none;
+     box-shadow: none;
+
+ }
+
+ .nav-discover {
+     font-size: 18px;
+     color: #ffff;
+     text-decoration: none;
+ }
+
+ .dropdown-menu1 {
+     margin-left: -116px;
+ }
+
+ #searchbar {
+     display: flex;
+     justify-content: center;
+     margin: 0 auto;
+     /* Center align if necessary */
+ }

@@ -1,0 +1,177 @@
+<div class="createpostcontainer">
+    <div class="createpostinnercontainer">
+        <form (ngSubmit)="onSubmit()" #createPostForm="ngForm">
+            <h4>Choose your Apartment and Building</h4>
+
+            <!-- Choose apartment building -->
+            <div class="formgroup">
+                <div class="mb-3">
+                    <label for="apartment" class="form-label">Choose your apartment/building</label>
+                    <select class="form-select" [(ngModel)]="post.apartment" name="apartment" #apartment="ngModel"
+                        required>
+                        <option value="Apartment/Building" disabled selected>Select</option>
+                        <option value="Building">Building</option>
+                        <option value="Apartment">Apartment</option>
+                    </select>
+                    <div *ngIf="apartment.invalid && (apartment.dirty || apartment.touched)" class="text-danger">
+                        Please select an apartment.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Enter your name</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="post.name" name="name"
+                        #name="ngModel" required />
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+                        Name is required.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shared property -->
+            <div class="mb-3">
+                <label class="form-label">Is this a shared property?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="sharedYes" name="isShared"
+                        [(ngModel)]="post.isShared" [value]="true" />
+                    <label class="form-check-label" for="sharedYes">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="sharedNo" name="isShared"
+                        [(ngModel)]="post.isShared" [value]="false" />
+                    <label class="form-check-label" for="sharedNo">No</label>
+                </div>
+            </div>
+
+            <!-- Property location -->
+            <div class="mb-3">
+                <label for="streetAddress" class="form-label">Property Location</label>
+                <input type="text" class="form-control" id="streetAddress" placeholder="Enter street address"
+                    [(ngModel)]="post.streetAddress" name="streetAddress" required />
+            </div>
+
+            <!-- Property details -->
+            <div class="formgroup">
+                <div class="mb-3">
+                    <label for="squareFeet" class="form-label">Square feet</label>
+                    <input type="number" class="form-control" id="squareFeet" placeholder="Enter area in square feet"
+                        [(ngModel)]="post.squareFeet" name="squareFeet" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Stay/Lease</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="leaseLongterm" name="leaseType"
+                            [(ngModel)]="post.leaseType" [value]="'Longterm'" />
+                        <label class="form-check-label" for="leaseLongterm">Longterm</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="leaseShortterm" name="leaseType"
+                            [(ngModel)]="post.leaseType" [value]="'Shortterm'" />
+                        <label class="form-check-label" for="leaseShortterm">Shortterm</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="leaseBoth" name="leaseType"
+                            [(ngModel)]="post.leaseType" [value]="'Both'" />
+                        <label class="form-check-label" for="leaseBoth">Both</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expected rent -->
+            <div class="formgroup">
+                <label for="expectedRent" class="form-label">Expected Rent</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="number" class="form-control" id="expectedRent" aria-describedby="basic-addon1"
+                        placeholder="Enter expected rent" [(ngModel)]="post.expectedRent" name="expectedRent"
+                        required />
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="negotiable" [(ngModel)]="post.negotiable"
+                        name="negotiable" />
+                    <label class="form-check-label" for="negotiable">
+                        Negotiable Price Mode
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="utilitiesIncluded" name="utilitiesIncluded"
+                        [(ngModel)]="post.utilitiesIncluded" [value]="'Utilities included'" />
+                    <label class="form-check-label" for="utilitiesIncluded">Utilities included in Rent</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="bothUtilities" name="utilitiesIncluded"
+                        [(ngModel)]="post.utilitiesIncluded" [value]="'Both'" />
+                    <label class="form-check-label" for="bothUtilities">Both</label>
+                </div>
+            </div>
+
+            <!-- Room furnished -->
+            <div class="mb-3">
+                <label class="form-label">Is the room Furnished?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="furnishedYes" name="furnished"
+                        [(ngModel)]="post.furnished" [value]="true" />
+                    <label class="form-check-label" for="furnishedYes">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="furnishedNo" name="furnished"
+                        [(ngModel)]="post.furnished" [value]="false" />
+                    <label class="form-check-label" for="furnishedNo">No</label>
+                </div>
+            </div>
+
+            <!-- Amenities included -->
+            <div class="mb-3">
+                <label class="form-label">Amenities Included</label>
+                <div style="display: flex;justify-content:space-between" class="amenities">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gym" [(ngModel)]="post.amenities.Gym"
+                            name="Gym" />
+                        <label class="form-check-label" for="gym">Gym/Fitness Center</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="PowerBackup"
+                            [(ngModel)]="post.amenities.PowerBackup" name="PowerBackup" />
+                        <label class="form-check-label" for="PowerBackup">Power Backup</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="SwimmingPool"
+                            [(ngModel)]="post.amenities.SwimmingPool" name="SwimmingPool" />
+                        <label class="form-check-label" for="owerBackup">Swimming Pool</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="LaundryService"
+                            [(ngModel)]="post.amenities.LaundryService" name="LaundryService" />
+                        <label class="form-check-label" for="LaundryService">Laundry Service</label>
+                    </div>
+                    <!-- Add more amenities similarly -->
+                </div>
+            </div>
+
+            <!-- Title & description -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter your AD title"
+                    [(ngModel)]="post.title" name="title" required />
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" aria-label="With textarea"
+                    placeholder="Enter a detailed description within 1400 characters" [(ngModel)]="post.description"
+                    name="description" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Upload images</label>
+                <input [(ngModel)]="post.images" name="images" type="file" (change)="onFileSelected($event)" multiple />
+            </div>
+            <!-- Submit button -->
+            <div class="col-12" style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 20px;">
+                <button class="btn btn-primary" style="width: 150px;" type="submit" [disabled]="createPostForm.invalid">
+                    Create Post
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

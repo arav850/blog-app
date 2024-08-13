@@ -1,0 +1,28 @@
+.container {
+  margin-top: 20px;
+  /* Adjust spacing as needed */
+}
+
+.about_section {
+  text-align: center;
+  /* Center text inside the section */
+}
+
+.about_img img,
+.like_icon img {
+  max-width: 100%;
+  /* Ensure images are responsive */
+  height: auto;
+}
+
+.article-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-jcs {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+
+}
