@@ -22,6 +22,9 @@ export class HomeComponent {
   search: any;
   filteredPosts: Post[] = [];
   favorites: string[] = []; // List of favorite post IDs
+  currentPage = 1; // Tracks the current page
+  itemsPerPage = 5; // Number of items per page
+  paginatedArticles: Article[] = []; // Articles to display on the current page
 
   router = inject(Router);
   userService = inject(UserService);
@@ -37,6 +40,7 @@ export class HomeComponent {
     this.articleService.getPosts().subscribe(
       (data: Article[]) => {
         this.articles = data;
+        this.updatePaginatedArticles();
       },
       (err) => {
         console.log(err);
@@ -53,6 +57,11 @@ export class HomeComponent {
     //   this.favorites = favorites;
     // });
   }
+  updatePaginatedArticles(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedArticles = this.articles.slice(startIndex, endIndex);
+  }
   onThumbnailClick(articleId: number) {
     this.router.navigate(['/viewarticle', articleId]);
   }
@@ -66,6 +75,14 @@ export class HomeComponent {
     } else {
       this.filteredPosts = this.posts; // No filter applied
     }
+  }
+  goToPage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.updatePaginatedArticles();
+  }
+  get totalPages(): number[] {
+    const pages = Math.ceil(this.articles.length / this.itemsPerPage);
+    return Array.from({ length: pages }, (_, i) => i + 1);
   }
 
   viewDetails(postId: string) {

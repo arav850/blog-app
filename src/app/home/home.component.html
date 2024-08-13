@@ -1,4 +1,4 @@
-<div class="about_section layout_padding" *ngFor="let article of articles">
+<div class="about_section layout_padding" *ngFor="let article of paginatedArticles">
     <div class="about_img" style="width: 100%;">
         <img [src]="article.thumbnail" class="img-fluid" alt="Article Thumbnail" (click)="onThumbnailClick(article.id)">
     </div>
@@ -26,3 +26,25 @@
         </div>
     </div>
 </div>
+
+<!-- Pagination Controls -->
+<!-- Pagination Controls -->
+<nav aria-label="Page navigation example" style="display:flex;justify-content:center">
+    <ul class="pagination">
+        <!-- Previous button -->
+        <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" href="#" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+
+        <!-- Dynamic page numbers -->
+        <li *ngFor="let page of totalPages" class="page-item" [class.active]="page === currentPage">
+            <a class="page-link" href="#" (click)="goToPage(page)">{{ page }}</a>
+        </li>
+
+        <!-- Next button -->
+        <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+            <a class="page-link" href="#" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+<div style="margin-bottom: 50px;"></div>
