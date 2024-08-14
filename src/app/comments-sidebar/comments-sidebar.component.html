@@ -1,0 +1,32 @@
+<div>
+    <textarea [(ngModel)]="newComment.text" placeholder="Write a comment..."></textarea>
+    <button (click)="postComment()">Post Comment</button>
+
+    <!-- <select (change)="sortComments($event.target.value)">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="mostLiked">Most Liked</option>
+    </select> -->
+
+    <div *ngFor="let comment of comments">
+        <div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text }}</p>
+            <small>{{ comment.date | date:'short' }}</small>
+            <button (click)="likeComment(comment)">Like ({{ comment.likes }})</button>
+
+            <!-- Reply Form -->
+            <textarea [(ngModel)]="replyText[comment.id]" placeholder="Write a reply..."></textarea>
+            <button (click)="replyToComment(comment)">Reply</button>
+
+            <!-- Replies -->
+            <div *ngFor="let reply of comment.replies">
+                <div>
+                    <strong>{{ reply.author }}</strong>
+                    <p>{{ reply.text }}</p>
+                    <small>{{ reply.date | date:'short' }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

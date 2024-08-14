@@ -4,8 +4,9 @@ export class User {
   fullName: string;
   email: string;
   password: string;
-  role: string;
+  role: 'author' | 'admin' | 'reader';
   favourites: any[];
+  views: number;
 
   constructor() {
     this.id = '';
@@ -13,7 +14,8 @@ export class User {
     this.fullName = '';
     this.email = '';
     this.password = '';
-    this.role = '';
+    this.role = 'reader';
     this.favourites = [];
+    this.views = 0;
   }
 }

@@ -8,66 +8,112 @@
                 <h3>Discover</h3>
                 <p>Step into a new zone, join a new conversation</p>
             </div>
-
-            <div class="input-group col-md-10">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Select
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Article</a></li>
-                        <li><a class="dropdown-item" href="#">Author</a></li>
-                    </ul>
+            <div class="input-group" style="display: flex; justify-content: center;">
+                <div style="width:40%; display: flex; flex-direction:row;">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ selectedFilter }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" (click)="setFilter('Article')">Article</a></li>
+                            <li><a class="dropdown-item" (click)="setFilter('Author')">Author</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText"
+                        aria-label="Search...">
+                    <button class="btn btn-outline-primary" type="button" (click)="onSearch()">Search</button>
                 </div>
-                <input type="text" class="form-control" placeholder="Search..." aria-label="Search...">
-                <button class="btn btn-outline-primary" type="button">Search</button>
             </div>
+
             <div style="display: flex;justify-content: center; margin-top: 30px;">
                 <span>Trending Keywords:</span>&nbsp;&nbsp;
                 <span class="badge rounded-pill text-bg-light" style="border:1px solid black">#Popular</span>
 
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4"></div>
         </div>
 
     </div>
-    <div style="margin-bottom: 50px;"></div>
-    <div>
-        <h3>Reader's choice </h3>
-        <p style="margin-bottom: 15px;"></p>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+    <div class="container" style="margin-bottom: 50px;"></div>
+    <div class="row">
+        <!-- <div class="col-md-4"> -->
+        <div class="row" style="margin:4rem">
+            <h3>Reader's choice </h3>
+            <div class="container" style="margin:1rem">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <!-- Carousel Items -->
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="card col-md-2" style="margin: .5rem;height:500px;width: 250px;"
+                                            *ngFor="let article of articles | slice: 0:4">
+                                            <img [src]="article.thumbnail" class="card-img-top" alt="Article thumbnail">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ article.title }}</h5>
+                                                <p class="card-text">{{ article.description | slice:0:100 }}...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="card col-md-2" style="margin: .5rem;height:500px;width: 250px;"
+                                            *ngFor="let article of articles | slice: 4:10">
+                                            <img [src]="article.thumbnail" class="card-img-top" alt="Article thumbnail">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ article.title }}</h5>
+                                                <p class="card-text">{{ article.description | slice:0:100 }}...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add more carousel items as needed -->
+                            </div>
+                            <!-- Carousel Controls -->
+                            <button style="margin-right:300px" class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExample" data-bs-slide="prev">
+                                <span style="width: 100px; height:100px;background-color:black;border-radius: 50%;"
+                                    class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span style="color: black; font-size: 5rem;">></span>
+                            </button>
+                            <button style="color: black;" class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExample" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span>></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
+
+
+
+
+
+        </div>
+        <div style="margin:2rem">
+            <h3>Rising Authors </h3>
+            <p style="margin-bottom: 15px;"></p>
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <span class="badge rounded-pill text-bg-light"
+                    style="border:1px solid black; width:100px">#Popular</span>
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the
+                        card's
+                        content.</p>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
     </div>
     <p style="margin-bottom:20px;"></p>
-
-    <div>
-        <h3>Rising Authors </h3>
-        <p style="margin-bottom: 15px;"></p>
-
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <span class="badge rounded-pill text-bg-light" style="border:1px solid black; width:100px">#Popular</span>
-
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-            </div>
-        </div>
-
-    </div>
     <div style="margin-bottom:50px ;"></div>
-
-
 </div>

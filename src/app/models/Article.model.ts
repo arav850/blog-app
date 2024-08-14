@@ -7,6 +7,9 @@ export class Article {
   authorName: string;
   publishDate: Date | string;
   category: string;
+  featured: boolean;
+  status: string;
+  authorId: string;
 
   constructor() {
     this.id = '';
@@ -17,5 +20,8 @@ export class Article {
     this.authorName = '';
     this.publishDate = new Date();
     this.category = '';
+    this.featured = false;
+    this.status = '';
+    this.authorId = '';
   }
 }

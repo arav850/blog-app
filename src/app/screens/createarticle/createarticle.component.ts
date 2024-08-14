@@ -19,6 +19,35 @@ export class CreatearticleComponent {
     public articleService: ArticleService, // public toastr: ToastrService
     public router: Router
   ) {}
+  drafts: Article = new Article();
+  ngOnInit() {
+    //const authorId = this.authService.getLoggedInUserId();
+    const authorId = '10';
+    this.articleService.getDraftsByAuthor(authorId).subscribe(
+      (drafts) => {
+        this.drafts = drafts;
+        console.log(drafts);
+      },
+      (error) => {
+        console.error('Error retrieving drafts', error);
+      }
+    );
+  }
+
+  saveDraft() {
+    // console.log();
+    this.articleData.status = 'draft';
+    this.articleService.saveArticle(this.articleData).subscribe(
+      (response) => {
+        console.log('Draft saved successfully', response);
+        // Optionally, navigate to drafts or a confirmation page
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        console.error('Error saving draft', error);
+      }
+    );
+  }
 
   createArticle() {
     // Assign the selected category to the articleData object

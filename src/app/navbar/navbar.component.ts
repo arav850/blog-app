@@ -35,7 +35,7 @@ export class NavbarComponent {
     });
   }
   onSearch(): void {
-    // console.log(this.searchText);
+    console.log(this.searchText);
     this.router.navigate(['/'], {
       queryParams: { search: this.searchText },
     });

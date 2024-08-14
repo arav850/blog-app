@@ -1,0 +1,116 @@
+.comments-sidebar {
+    // position: fixed;
+    right: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(247, 20, 20);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.comment-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.comment-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.post-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.comments-list {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.comment-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-time {
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.comment-actions {
+    margin-top: 10px;
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.load-more-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.comments-sidebar {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.comments-sidebar.open {
+    transform: translateX(0);
+}

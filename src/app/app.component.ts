@@ -19,6 +19,7 @@ import { environment } from '../../environment/environment';
 // import { FirebaseModule } from '../../firebase.module';
 import { appConfig } from './app.config';
 import { DatePipe } from '@angular/common';
+import { CommentsSidebarComponent } from './comments-sidebar/comments-sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,7 @@ import { DatePipe } from '@angular/common';
     MyfavouritesComponent,
     // FirebaseModule,
     CommonModule,
+    CommentsSidebarComponent,
 
     // AngularFireModule.initializeApp(environment.firebaseConfig),
 

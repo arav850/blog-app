@@ -26,4 +26,21 @@ export class ArticleService {
       })
     );
   }
+  saveArticle(article: Article): Observable<Article> {
+    if (article.id) {
+      // Update an existing article
+      return this.http.put<Article>(
+        `${this.articleUrl}/${article.id}`,
+        article
+      );
+    } else {
+      // Create a new article
+      return this.http.post<Article>(this.articleUrl, article);
+    }
+  }
+  getDraftsByAuthor(authorId: string): Observable<Article> {
+    return this.http.get<Article>(
+      `${this.articleUrl}?authorId=${authorId}&status=draft`
+    );
+  }
 }

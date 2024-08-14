@@ -25,6 +25,7 @@ export class HomeComponent {
   currentPage = 1; // Tracks the current page
   itemsPerPage = 5; // Number of items per page
   paginatedArticles: Article[] = []; // Articles to display on the current page
+  filteredArticles: Article[] = [];
 
   router = inject(Router);
   userService = inject(UserService);
@@ -39,7 +40,11 @@ export class HomeComponent {
   ngOnInit() {
     this.articleService.getPosts().subscribe(
       (data: Article[]) => {
-        this.articles = data;
+        //this.articles = data;
+        this.articles = data.filter(
+          (article) => article.status === 'published'
+        );
+        this.applyFilters();
         this.updatePaginatedArticles();
       },
       (err) => {
@@ -57,24 +62,40 @@ export class HomeComponent {
     //   this.favorites = favorites;
     // });
   }
+  sortArticles(sortBy: string) {
+    if (sortBy === 'latest') {
+      this.articles.sort(
+        (a, b) =>
+          new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+      );
+    } else if (sortBy === 'featured') {
+      this.articles = this.articles.filter((article) => article.featured);
+      console.log(this.articles);
+    } else if (sortBy === 'popular') {
+      // Sort by view count for popular articles
+      // this.articles.sort((a, b) => b.viewCount - a.viewCount);
+    }
+    this.updatePaginatedArticles();
+  }
   updatePaginatedArticles(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedArticles = this.articles.slice(startIndex, endIndex);
+    // this.paginatedArticles = this.filteredArticles;
   }
   onThumbnailClick(articleId: number) {
     this.router.navigate(['/viewarticle', articleId]);
   }
   applyFilters(): void {
+    const previousArticles = this.articles;
     if (this.search) {
-      this.filteredPosts = this.posts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(this.search.toLowerCase()) ||
-          post.description.toLowerCase().includes(this.search.toLowerCase())
+      this.articles = previousArticles.filter((article) =>
+        article.title.toLowerCase().includes(this.search.toLowerCase())
       );
     } else {
-      this.filteredPosts = this.posts; // No filter applied
+      this.articles = previousArticles; // No filter applied
     }
+    this.updatePaginatedArticles();
   }
   goToPage(pageNumber: number): void {
     this.currentPage = pageNumber;

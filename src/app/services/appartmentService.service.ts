@@ -33,9 +33,9 @@ export class Appartmentservice {
       })
     );
   }
-  setSearchText(searchText: string): void {
-    // this.searchTextSubject.next(searchText);
-  }
+  // setSearchText(searchText: string): void {
+  //   this.searchTextSubject.next(searchText);
+  // }
 
   getCommentsByPostId(postId: string): Observable<Comments[]> {
     const url = `${this.commentsUrl}`;

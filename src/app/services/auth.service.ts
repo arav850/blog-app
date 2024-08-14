@@ -72,8 +72,9 @@ export class AuthService {
             fullName: user.displayName || '',
             email: user.email || '',
             password: '123456', // Password is left empty
-            role: 'user', // Default role, modify if needed
+            role: 'author', // Default role, modify if needed
             favourites: [],
+            views: 0,
           };
 
           // Store user details in the JSON server

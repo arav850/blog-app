@@ -37,6 +37,15 @@ export class UserService {
       })
     );
   }
+  getAuthors(role: 'author'): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl).pipe(
+      map((users) => users.filter((user) => user.role === role)),
+      catchError((error) => {
+        console.error('Error fetching users by role', error);
+        return of([]); // Return an empty array in case of error
+      })
+    );
+  }
 
   addToFavourites(postId: string): Observable<any> {
     return this.getUserById(this.userId).pipe(

@@ -1,50 +1,68 @@
-<div class="about_section layout_padding" *ngFor="let article of paginatedArticles">
-    <div class="about_img" style="width: 100%;">
-        <img [src]="article.thumbnail" class="img-fluid" alt="Article Thumbnail" (click)="onThumbnailClick(article.id)">
-    </div>
-    <div class="like_icon">
-        <img src="images/like-icon.png" alt="Like Icon">
-    </div>
-    <p class="post_text">Post By : {{ article.publishDate | date }}</p>
-    <h2 class="most_text">{{ article.title }}</h2>
-    <p class="lorem_text">
-        {{ article.description | slice:0:100 }}...
-        <a [routerLink]="['/viewarticle', article.id]">Read More</a>
-    </p>
-    <div class="flex-jcs">
-        <div class="read_bt">
-            <!-- <p>Views: {{ article.views }}</p> -->
-        </div>
-        <div class="read_bt">
-            <!-- <p>Comments: {{ article.comments.length }}</p> -->
-        </div>
-        <div class="read_bt">
-            <p>Save</p>
-        </div>
-        <div class="read_bt">
-            <p>{{ article.authorName }}</p>
+<div>
+    <div>
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sort by
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="sortArticles('latest')">Latest</a></li>
+                <li><a class="dropdown-item" (click)="sortArticles('featured')">Featured</a></li>
+            </ul>
         </div>
     </div>
+    <div class="about_section layout_padding" *ngFor="let article of paginatedArticles"
+        style="display: flex;justify-content:space-between">
+        <div style="width: 60%;">
+            <p class="post_text">Post By : {{ article.publishDate | date }}</p>
+            <h2 class="most_text">{{ article.title }}</h2>
+            <p class="lorem_text">
+                {{ article.description | slice:0:100 }}...
+                <a [routerLink]="['/viewarticle', article.id]">Read More</a>
+            </p>
+            <div class="flex-jcs">
+                <div class="read_bt">
+                    <!-- <p>Views: {{ article.views }}</p> -->
+                </div>
+                <div class="read_bt">
+                    <!-- <p>Comments: {{ article.comments.length }}</p> -->
+                </div>
+                <div class="read_bt">
+                    <p>Save</p>
+                </div>
+                <div class="read_bt">
+                    <p>{{ article.authorName }}</p>
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 40%;">
+            <div class="about_img" style="width: 100%;">
+                <img style="width: 80%; height: 200px;" [src]="article.thumbnail" class="img-fluid"
+                    alt="Article Thumbnail" (click)="onThumbnailClick(article.id)">
+            </div>
+            <div class="like_icon">
+                <img src="images/like-icon.png" alt="Like Icon">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Pagination-->
+    <nav aria-label="Page navigation example" style="display:flex;justify-content:center">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+            </li>
+
+            <li *ngFor="let page of totalPages" class="page-item" [class.active]="page === currentPage">
+                <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+    <div style="margin-bottom: 50px;"></div>
+
 </div>
-
-<!-- Pagination Controls -->
-<!-- Pagination Controls -->
-<nav aria-label="Page navigation example" style="display:flex;justify-content:center">
-    <ul class="pagination">
-        <!-- Previous button -->
-        <li class="page-item" [class.disabled]="currentPage === 1">
-            <a class="page-link" href="#" (click)="goToPage(currentPage - 1)">Previous</a>
-        </li>
-
-        <!-- Dynamic page numbers -->
-        <li *ngFor="let page of totalPages" class="page-item" [class.active]="page === currentPage">
-            <a class="page-link" href="#" (click)="goToPage(page)">{{ page }}</a>
-        </li>
-
-        <!-- Next button -->
-        <li class="page-item" [class.disabled]="currentPage === totalPages.length">
-            <a class="page-link" href="#" (click)="goToPage(currentPage + 1)">Next</a>
-        </li>
-    </ul>
-</nav>
-<div style="margin-bottom: 50px;"></div>

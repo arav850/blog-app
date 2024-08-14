@@ -1,41 +1,50 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ArticleService } from '../../services/articleService.service';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from '../../models/Article.model';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CommentsSidebarComponent } from '../../comments-sidebar/comments-sidebar.component';
+
 @Component({
   selector: 'app-viewarticle',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule, RouterModule, CommentsSidebarComponent],
   templateUrl: './viewarticle.component.html',
   styleUrl: './viewarticle.component.scss',
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class ViewarticleComponent {
-  public articleid: string | null = null;
+  public articleId: string | null = null;
   postId: string | null = null;
   article: Article | undefined;
-
+  relatedArticles: Article[] = [];
+  displayComments: Boolean = false;
   constructor(
-    public articles: ArticleService,
+    public articleSerivice: ArticleService,
     public route: ActivatedRoute // private datePipe: DatePipe
   ) {
-    this.articleid = '';
+    this.articleId = '';
   }
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      this.articleid = params.get('id');
-
-      if (this.articleid) {
-        this.articles.getPostById(this.articleid).subscribe(
+      this.articleId = params.get('id');
+      if (this.articleId) {
+        this.articleSerivice.getPostById(this.articleId).subscribe(
           (article: Article | undefined) => {
             if (article) {
               this.article = article;
+              if (article.image) {
+                article.image = this.convertBase64ToImage(article.image);
+              }
+              this.fetchRelatedArticles(article.category); // Fetch related articles
             }
-            if (article?.image) {
-              article.image = this.convertBase64ToImage(article.image);
-            }
-            console.log(article);
+            // console.log(article);
           },
           (error) => {
             console.error('Error fetching post', error);
@@ -44,6 +53,37 @@ export class ViewarticleComponent {
       }
     });
   }
+  fetchRelatedArticles(category: any) {
+    this.articleSerivice.getPosts().subscribe(
+      (articles: Article[]) => {
+        this.relatedArticles = articles
+          .filter(
+            (article) =>
+              article.category === category &&
+              article.id !== this.articleId &&
+              article.status === 'published'
+          )
+          .map((article) => ({
+            ...article,
+            imageUrl: this.convertBase64ToImage(article.image),
+          }));
+
+        // Now, this.relatedArticles contains the precomputed image URLs
+      },
+      (error) => {
+        console.error('Error fetching related articles', error);
+      }
+    );
+  }
+
+  openSidebar() {
+    this.displayComments = !this.displayComments;
+
+    console.log(this.displayComments);
+
+    // document.querySelector('.comments-sidebar')?.classList.add('open');
+  }
+
   convertBase64ToImage(base64: string): string {
     const binary = atob(base64.split(',')[1]); // Decode the base64 string
     const array = [];
