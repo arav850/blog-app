@@ -8,15 +8,12 @@ describe('CommentsSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommentsSidebarComponent]
-    })
-    .compileComponents();
-
+      imports: [CommentsSidebarComponent],
+    }).compileComponents();
     fixture = TestBed.createComponent(CommentsSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

@@ -181,6 +181,33 @@
       "replies": [],
       "date": "2024-08-16T04:46:36.971Z",
       "likes": 0
+    },
+    {
+      "id": "",
+      "articleId": "543",
+      "author": "",
+      "text": "okay",
+      "replies": [],
+      "date": "2024-08-16T12:38:18.335Z",
+      "likes": 0
+    },
+    {
+      "id": "",
+      "articleId": "",
+      "author": "",
+      "text": "comment1",
+      "replies": [],
+      "date": "2024-08-16T12:46:50.694Z",
+      "likes": 0
+    },
+    {
+      "id": "",
+      "articleId": "543",
+      "author": "",
+      "text": "comment 1 reply1",
+      "replies": [],
+      "date": "2024-08-16T12:48:03.893Z",
+      "likes": 0
     }
   ],
   "articles": [

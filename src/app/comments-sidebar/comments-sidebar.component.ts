@@ -47,7 +47,6 @@ export class CommentsSidebarComponent {
       reply.text = this.replyText[parentComment.id];
       reply.articleId = this.articleId;
       reply.replies = [];
-
       parentComment.replies.push(reply);
       this.commentService.postComment(reply).subscribe(() => {
         this.loadComments();
