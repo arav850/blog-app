@@ -31,7 +31,11 @@
                                             required>
                                             <option value="">Select Category</option>
                                             <option value="sports">Sports</option>
-                                            <option value="gym">Gym</option>
+                                            <option value="Bussiness">Bussiness</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="Travel">Travel</option>
+                                            <option value="Movie">Movie</option>
+                                            <option value="Lifestyle">Lifestyle</option>
                                         </select>
                                     </div>
                                 </div>
@@ -50,7 +54,8 @@
                                     <!-- Show "Save Draft" or "Update Draft" button based on whether it’s a new or existing draft -->
 
                                     <div style="display: flex; justify-content: center; margin-bottom: 70px;">
-                                        <button (click)="saveDraft()" class="btn btn-primary" type="button">{{
+                                        <button (click)="articleData.authorId ? updateDraft() : saveDraft()"
+                                            class="btn btn-primary" type="button">{{
                                             articleData.authorId ? 'Update
                                             Draft'
                                             :'Save Draft' }}

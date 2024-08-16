@@ -29,8 +29,8 @@ export class CreatearticleComponent implements OnInit {
     this.userdetails = JSON.parse(this.cookie.get('userDetails'));
     this.articleService.getDraftsByAuthor(this.userdetails.userId).subscribe(
       (drafts) => {
-        this.drafts = drafts;
-        console.log(drafts);
+        this.drafts = drafts.filter((item) => item.status === 'draft');
+        // console.log(drafts);
       },
       (error) => {
         console.error('Error retrieving drafts', error);
@@ -47,8 +47,11 @@ export class CreatearticleComponent implements OnInit {
   saveDraft() {
     this.articleData.status = 'draft';
     this.articleData.authorId = this.userdetails.userId;
-    console.log(this.articleData);
-    this.articleService.saveArticle(this.articleData).subscribe(
+    // console.log(this.articleData);
+    if (!this.articleData.id) {
+      this.articleData.id = String(this.generateRandomId());
+    }
+    this.articleService.createPost(this.articleData).subscribe(
       (response) => {
         console.log('Draft saved successfully', response);
         this.router.navigate(['/']);
@@ -59,23 +62,52 @@ export class CreatearticleComponent implements OnInit {
     );
   }
 
-  createArticle() {
-    this.articleData.status = 'published';
+  updateDraft() {
+    this.articleData.status = 'draft';
     this.articleData.authorId = this.userdetails.userId;
-
-    if (!this.articleData.id) {
-      // Assign a new ID for the published article if it was not a draft
-      this.articleData.id = String(this.generateRandomId());
-    }
-    this.articleService.createPost(this.articleData).subscribe({
-      next: (article) => {
+    console.log(this.articleData);
+    // if (!this.articleData.id) {
+    //   this.articleData.id = String(this.generateRandomId());
+    // }
+    this.articleService.updateArticle(this.articleData).subscribe(
+      (response) => {
+        console.log('Draft updated successfully', response);
         this.router.navigate(['/']);
       },
-      error: (err) => {
-        console.error('Error creating article:', err);
-      },
-    });
-    console.log(this.articleData);
+      (error) => {
+        console.error('Error updating draft', error);
+      }
+    );
+  }
+
+  createArticle() {
+    if (this.articleData.status === 'draft') {
+      this.articleData.status = 'published';
+      this.articleService.updateArticle(this.articleData).subscribe(
+        (response) => {
+          console.log('article updated successfully', response);
+          this.router.navigate(['/']);
+          return;
+        },
+        (error) => {
+          console.error('Error creating draft', error);
+          return;
+        }
+      );
+    } else if (this.articleData.status === '' && !this.articleData.id) {
+      this.articleData.status = 'published';
+      this.articleData.authorId = this.userdetails.userId;
+      this.articleData.id = String(this.generateRandomId());
+
+      this.articleService.createPost(this.articleData).subscribe({
+        next: (article) => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Error creating article:', err);
+        },
+      });
+    }
   }
 
   private generateRandomId(): number {

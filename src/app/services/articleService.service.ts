@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Post } from '../models/Post.model';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -26,29 +26,17 @@ export class ArticleService {
       })
     );
   }
-  saveArticle(article: Article): Observable<Article> {
-    console.log(article);
-
-    if (article.id) {
-      // Create new draft
-      article.id = String(this.generateRandomId());
-      return this.http.put<Article>(
-        `${this.articleUrl}/${article.id}`,
-        article
-      );
-      // Update an existing article
-    } else {
-      return this.http.post<Article>(this.articleUrl, article);
-
-      // Create a new article
-    }
+  updateArticle(article: Article): Observable<Article> {
+    return this.http.put<Article>(`${this.articleUrl}/${article.id}`, article);
   }
   private generateRandomId(): number {
     return Math.floor(Math.random() * 1000);
   }
   getDraftsByAuthor(authorId: string): Observable<Article[]> {
-    return this.http.get<Article[]>(
-      `${this.articleUrl}?authorId=${authorId}&status=draft`
-    );
+    const params = new HttpParams()
+      .set('authorId', authorId)
+      .set('status', 'draft');
+
+    return this.http.get<Article[]>(this.articleUrl, { params });
   }
 }

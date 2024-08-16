@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms'; // Correct import
 import { ActivatedRoute } from '@angular/router';
 import { Comments } from '../models/Comments.model';
 import { CommentService } from '../services/commentsService.service';
-
 @Component({
   selector: 'comments-sidebar',
   standalone: true,
