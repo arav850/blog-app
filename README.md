@@ -2,15 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
 
-## Credentials
+# HostedLink
 
-Buyer:
-username: buyer@gmail.com
-password: Buyer@123
-
-Seller:
-username: seller@gmail.com
-password: Seller@123
+https://blog-5nabkiy1c-arav850s-projects.vercel.app/
 
 ## Development server
 
