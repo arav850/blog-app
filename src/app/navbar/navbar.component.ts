@@ -19,17 +19,21 @@ export class NavbarComponent {
   cookie = inject(CookieService);
   router = inject(Router);
   userName: string = '';
+  userDetails: any;
   searchText: any;
+  isUserLogin: boolean = false;
   ngDoCheck() {
-    this.userRole = this.cookie.get('userRole');
-    this.userName = this.cookie.get('userName');
+    const userData = this.cookie.get('userDetails');
+    if (userData) {
+      this.userDetails = JSON.parse(userData);
+      this.isUserLogin = true;
+      this.userName = this.userDetails.fullName;
+    }
   }
 
   logout() {
-    this.cookie.delete('userRole');
-    this.cookie.delete('userId');
-    this.cookie.delete('userName');
-
+    this.isUserLogin = false;
+    this.cookie.delete('userDetails');
     this.router.navigate(['/']).then(() => {
       window.location.reload();
     });

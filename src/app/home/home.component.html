@@ -1,20 +1,18 @@
 <div>
-    <div>
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Sort by
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" (click)="sortArticles('latest')">Latest</a></li>
-                <li><a class="dropdown-item" (click)="sortArticles('featured')">Featured</a></li>
-            </ul>
-        </div>
+
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Sort by
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" (click)="sortArticles('latest')">Latest</a></li>
+            <li><a class="dropdown-item" (click)="sortArticles('featured')">Featured</a></li>
+        </ul>
     </div>
     <div class="about_section layout_padding" *ngFor="let article of paginatedArticles"
-        style="display: flex;justify-content:space-between">
+        style="display: flex;justify-content:space-between; margin-bottom: 10px;">
         <div style="width: 60%;">
-            <p class="post_text">Post By : {{ article.publishDate | date }}</p>
             <h2 class="most_text">{{ article.title }}</h2>
             <p class="lorem_text">
                 {{ article.description | slice:0:100 }}...
@@ -22,9 +20,14 @@
             </p>
             <div class="flex-jcs">
                 <div class="read_bt">
+                    <p class="post_text">Date: {{ article.publishDate | date }}</p>
+                </div>
+                <div class="read_bt" style="background-color: red;">
+
                     <!-- <p>Views: {{ article.views }}</p> -->
                 </div>
-                <div class="read_bt">
+                <div>
+                    <i class='far fa-comments'></i>
                     <!-- <p>Comments: {{ article.comments.length }}</p> -->
                 </div>
                 <div class="read_bt">
@@ -41,9 +44,9 @@
                 <img style="width: 80%; height: 200px;" [src]="article.thumbnail" class="img-fluid"
                     alt="Article Thumbnail" (click)="onThumbnailClick(article.id)">
             </div>
-            <div class="like_icon">
+            <!-- <div class="like_icon">
                 <img src="images/like-icon.png" alt="Like Icon">
-            </div>
+            </div> -->
 
         </div>
     </div>

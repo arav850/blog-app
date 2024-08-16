@@ -28,11 +28,10 @@ export class LoginComponent {
     this.login.findUser(this.userDetails).subscribe((user: User | null) => {
       if (user) {
         if (user.userId) {
-          this.cookie.set('userId', user.userId);
+          //to store obj to string formate use jsonstringify syntax
+          this.cookie.set('userDetails', JSON.stringify(user));
+          console.log(user);
         }
-        this.cookie.set('userRole', user.role);
-        this.cookie.set('userName', user.fullName);
-
         this.router.navigate(['']);
       } else {
         alert('User Not Found');
@@ -43,7 +42,11 @@ export class LoginComponent {
     this.login.signInWithGoogle().subscribe({
       next: (user) => {
         if (user) {
-          //this.cookie.set('userId', user.userId);
+          const userDetails = JSON.stringify(user);
+          this.cookie.set('userDetails', userDetails);
+          this.router.navigate(['']);
+          console.log(user);
+
           // Navigate to another page or update the UI as needed
         }
       },

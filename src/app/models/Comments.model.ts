@@ -1,15 +1,16 @@
 export class Comments {
-  id: string; // Unique identifier for each comment
-  postId: string; // ID of the post this comment belongs to
-  author: string; // Author of the comment
-  text: string; // Content of the comment
-  replies: Comments[]; // Replies to this comment
-  date: Date; // Date when the comment was posted
-  likes: number; // Number of likes
+  id: string;
+  articleId: string;
+  author: string;
+  text: string;
+  replies: Comments[];
+  date: Date;
+  likes: number;
+  showReplies?: boolean;
 
   constructor() {
     this.id = '';
-    this.postId = '';
+    this.articleId = '';
     this.author = '';
     this.text = '';
     this.replies = [];

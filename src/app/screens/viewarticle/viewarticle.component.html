@@ -1,5 +1,5 @@
 <div class="about_section layout_padding ">
-    <div class="view_article" style="margin: 4rem;padding:4rem;">
+    <div class="view_article" style="margin: 3rem;padding:2rem;">
         <div
             style="display: flex; justify-content:flex-start; flex-direction: row; width: 100%;gap: 1rem;margin-bottom: 1rem;">
             <span class="badge rounded-pill text-bg-light" style="border:1px solid black">Popular</span>
@@ -16,13 +16,12 @@
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Comments</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                ...
+                <comments-sidebar [articleId]="articleId"></comments-sidebar>
             </div>
-            <comments-sidebar [articleId]="articleId"></comments-sidebar>
         </div>
         <div style="display: flex; justify-content:flex-start; flex-direction: row; width: 100%;gap: 1rem; margin-bottom:
             1rem;">
@@ -62,9 +61,9 @@
             </div>
         </div>
     </div>
-    <div>
+    <div style="margin-left: 40px;">
         <div>
-            <h3>Recommended for you</h3>
+            <h3 style="margin-bottom: 30px;">Recommended for you</h3>
         </div>
         <div class="row">
             <div *ngFor="let relatedArticle of relatedArticles" class="col-md-4 mb-3">
@@ -72,7 +71,7 @@
                     <img [src]="relatedArticle.image" class="card-img-top" alt="Article image">
                     <div class="card-body">
                         <h5 class="card-title">{{ relatedArticle?.title }}</h5>
-                        <p class="card-text">{{ relatedArticle?.description }}...</p>
+                        <p class="card-text">{{ relatedArticle?.description |slice:0:100 }}...</p>
                         <a [routerLink]="['/viewarticle', relatedArticle.id]" class="btn btn-primary">Read More</a>
                     </div>
                 </div>

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Appartmentservice } from '../../services/appartmentService.service';
 import { Post } from '../../models/Post.model';
 import { RouterModule, Router } from '@angular/router';
 @Component({
@@ -20,7 +19,6 @@ export class CreatepostComponent {
 
   public http = inject(HttpClient);
 
-  public appartmentService = inject(Appartmentservice);
   router = inject(Router);
   constructor() {}
 
@@ -51,24 +49,24 @@ export class CreatepostComponent {
   }
 
   onSubmit() {
-    if (this.isSubmitting) {
-      return; // Prevent multiple submissions
-    }
-    this.isSubmitting = true;
-    this.post.id = String(this.generateRandomId());
-    this.appartmentService.createPost(this.post).subscribe(
-      (res: Post) => {
-        alert('Post Created Successfully');
-        // console.log('Post created successfully:', res);
-        // Additional actions on success, like navigating to another page or showing a success message
-      },
-      (error: any) => {
-        console.error('Error creating post:', error);
-        this.isSubmitting = false;
-        // Handle the error, e.g., show an error message to the user
-      }
-    );
-    this.router.navigate(['']);
+    // if (this.isSubmitting) {
+    //   return; // Prevent multiple submissions
+    // }
+    // this.isSubmitting = true;
+    // this.post.id = String(this.generateRandomId());
+    // this.appartmentService.createPost(this.post).subscribe(
+    //   (res: Post) => {
+    //     alert('Post Created Successfully');
+    //     // console.log('Post created successfully:', res);
+    //     // Additional actions on success, like navigating to another page or showing a success message
+    //   },
+    //   (error: any) => {
+    //     console.error('Error creating post:', error);
+    //     this.isSubmitting = false;
+    //     // Handle the error, e.g., show an error message to the user
+    //   }
+    // );
+    // this.router.navigate(['']);
   }
   private generateRandomId(): number {
     return Math.floor(Math.random() * 1000);

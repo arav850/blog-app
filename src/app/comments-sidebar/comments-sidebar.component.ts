@@ -13,56 +13,68 @@ import { CommentService } from '../services/commentsService.service';
   styleUrls: ['./comments-sidebar.component.scss'],
 })
 export class CommentsSidebarComponent {
-  public articleId: string | null = null;
-
   newComment: Comments = new Comments();
-  replyText: { [key: string]: string } = {}; // To store reply texts keyed by comment ID
+  replyText: { [key: string]: string } = {}; // store reply texts keyed by comment ID
   comments: Comments[] = [];
-  postId: string = ''; // This should be dynamically set based on the current post
+  postId: string = '';
+  articleId: string = '';
+
   constructor(
     private commentService: CommentService,
     public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.loadComments();
-  }
-  postComment() {
-    // this.newComment.postId = this.articleId;
     this.route.paramMap.subscribe((params) => {
-      this.articleId = params.get('id');
+      this.articleId = params.get('id') ?? '';
+      this.loadComments();
     });
-    console.log(this.articleId);
+  }
+
+  postComment() {
+    this.route.paramMap.subscribe((params) => {
+      this.articleId = params.get('id') ?? '';
+    });
 
     this.commentService.postComment(this.newComment).subscribe((data) => {
-      console.log(data);
       this.loadComments();
       this.newComment = new Comments();
     });
   }
-  replyToComment(parentComment: Comments) {
-    const reply: Comments = new Comments();
-    reply.text = this.replyText[parentComment.id];
-    reply.postId = this.postId;
-    reply.replies = []; // Initialize replies as empty array
 
-    // Add the reply to the parent comment's replies array
-    parentComment.replies.push(reply);
-    this.commentService.postComment(reply).subscribe(() => {
-      this.loadComments();
-      this.replyText[parentComment.id] = ''; // Reset reply text
-    });
+  replyToComment(parentComment: Comments) {
+    if (this.articleId) {
+      const reply: Comments = new Comments();
+      reply.text = this.replyText[parentComment.id];
+      reply.articleId = this.articleId;
+      reply.replies = [];
+
+      parentComment.replies.push(reply);
+      this.commentService.postComment(reply).subscribe(() => {
+        this.loadComments();
+        this.replyText[parentComment.id] = ''; // Reset reply text
+      });
+    } else {
+      console.error('Article ID is null.');
+    }
   }
 
   loadComments() {
-    this.commentService.getComments(this.postId).subscribe((comments) => {
-      this.comments = comments;
+    this.commentService.getComments(this.articleId).subscribe((comments) => {
+      this.comments = comments.map((comment) => ({
+        ...comment,
+        showReplies: false, // Initialize `showReplies` as false
+      }));
     });
   }
 
   likeComment(comment: Comments) {
     comment.likes++;
     this.commentService.updateComment(comment).subscribe();
+  }
+
+  toggleReplies(comment: Comments) {
+    comment.showReplies = !comment.showReplies;
   }
 
   sortComments(criteria: 'newest' | 'oldest' | 'mostLiked') {

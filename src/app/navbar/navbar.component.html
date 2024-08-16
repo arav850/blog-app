@@ -28,19 +28,17 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                <li *ngIf="userDetails?.role === 'author'" class="nav-item">
                     <a class="nav-link" aria-current="page" href="/createarticle">Create Article</a>
                 </li>
-                <li *ngIf="userRole === 'Seller'" class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/createpost">CreatePost</a>
-                </li>
-                <li *ngIf="!userRole" class="nav-item">
+                <li *ngIf="!isUserLogin" class="nav-item">
+                    <!-- Changed condition -->
                     <a class="nav-link" aria-current="page" href="/login">Login</a>
                 </li>
-                <li *ngIf="!userRole" class="nav-item">
+                <li *ngIf="!isUserLogin" class="nav-item">
+                    <!-- Changed condition -->
                     <a class="nav-link" aria-current="page" href="/register">Register</a>
                 </li>
-
             </ul>
             <div class="btn-group">
                 <button *ngIf="userName" class="btn btn-secondary btn-no-style dropdown-toggle" type="button"
@@ -48,10 +46,12 @@
                     Hi {{userName}}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="/myfavourites">Favorites</a></li>
-                    <li><a *ngIf="userRole" (click)="logout()" class="dropdown-item">Logout</a></li>
+                    <!-- <li><a class="dropdown-item" href="/myfavourites">Favorites</a></li> -->
+                    <li><a *ngIf="isUserLogin" (click)="logout()" class="dropdown-item">Logout</a></li>
+                    <!-- Adjusted condition -->
                 </ul>
             </div>
         </div>
+
     </div>
 </nav>

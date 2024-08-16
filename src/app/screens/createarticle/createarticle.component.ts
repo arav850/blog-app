@@ -1,29 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// import { ToastrService } from 'ngx-toastr';
 import { Article } from '../../models/Article.model';
 import { ArticleService } from '../../services/articleService.service';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-createarticle',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './createarticle.component.html',
-  styleUrl: './createarticle.component.scss',
+  styleUrls: ['./createarticle.component.scss'],
 })
-export class CreatearticleComponent {
+export class CreatearticleComponent implements OnInit {
   articleData: Article = new Article();
-  selectedCategory: string | null = null;
+  drafts: Article[] = [];
+  userdetails: any;
+
   constructor(
-    public articleService: ArticleService, // public toastr: ToastrService
-    public router: Router
+    public articleService: ArticleService,
+    public router: Router,
+    public cookie: CookieService,
+    private cdr: ChangeDetectorRef
   ) {}
-  drafts: Article = new Article();
+
   ngOnInit() {
-    //const authorId = this.authService.getLoggedInUserId();
-    const authorId = '10';
-    this.articleService.getDraftsByAuthor(authorId).subscribe(
+    this.userdetails = JSON.parse(this.cookie.get('userDetails'));
+    this.articleService.getDraftsByAuthor(this.userdetails.userId).subscribe(
       (drafts) => {
         this.drafts = drafts;
         console.log(drafts);
@@ -34,13 +38,19 @@ export class CreatearticleComponent {
     );
   }
 
+  openDraft(draft: Article) {
+    this.articleData = { ...draft };
+    // console.log('Draft data after setting:', this.articleData);
+    this.cdr.detectChanges();
+  }
+
   saveDraft() {
-    // console.log();
     this.articleData.status = 'draft';
+    this.articleData.authorId = this.userdetails.userId;
+    console.log(this.articleData);
     this.articleService.saveArticle(this.articleData).subscribe(
       (response) => {
         console.log('Draft saved successfully', response);
-        // Optionally, navigate to drafts or a confirmation page
         this.router.navigate(['/']);
       },
       (error) => {
@@ -50,47 +60,50 @@ export class CreatearticleComponent {
   }
 
   createArticle() {
-    // Assign the selected category to the articleData object
-    this.articleData.id = String(this.generateRandomId());
+    this.articleData.status = 'published';
+    this.articleData.authorId = this.userdetails.userId;
+
+    if (!this.articleData.id) {
+      // Assign a new ID for the published article if it was not a draft
+      this.articleData.id = String(this.generateRandomId());
+    }
     this.articleService.createPost(this.articleData).subscribe({
       next: (article) => {
-        // this.toastr.success('Article Created Success');
-        // console.log(article);
         this.router.navigate(['/']);
       },
       error: (err) => {
-        // Handle error here
-        console.error('Registration error:', err);
+        console.error('Error creating article:', err);
       },
     });
-
     console.log(this.articleData);
   }
+
   private generateRandomId(): number {
     return Math.floor(Math.random() * 1000);
   }
+
   onCategoryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.articleData.category = selectElement.value;
   }
+
   onThumbnailSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.articleData.thumbnail = reader.result as string; // Store Base64 string
+        this.articleData.thumbnail = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
   }
-  onImageSelected(event: any) {
-    // Logic to handle image upload (if separate from thumbnail)
 
+  onImageSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.articleData.image = reader.result as string; // Store Base64 string
+        this.articleData.image = reader.result as string;
       };
       reader.readAsDataURL(file);
     }

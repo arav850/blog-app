@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MenucardComponent } from '../menucard/menucard.component';
 import { CommonModule } from '@angular/common';
-import { Appartmentservice } from '../services/appartmentService.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Post } from '../models/Post.model';
@@ -32,7 +31,6 @@ export class HomeComponent {
   public articles: Article[] = [];
 
   constructor(
-    private appartmentService: Appartmentservice,
     private route: ActivatedRoute,
     private articleService: ArticleService
   ) {}

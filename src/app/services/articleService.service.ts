@@ -27,19 +27,27 @@ export class ArticleService {
     );
   }
   saveArticle(article: Article): Observable<Article> {
+    console.log(article);
+
     if (article.id) {
-      // Update an existing article
+      // Create new draft
+      article.id = String(this.generateRandomId());
       return this.http.put<Article>(
         `${this.articleUrl}/${article.id}`,
         article
       );
+      // Update an existing article
     } else {
-      // Create a new article
       return this.http.post<Article>(this.articleUrl, article);
+
+      // Create a new article
     }
   }
-  getDraftsByAuthor(authorId: string): Observable<Article> {
-    return this.http.get<Article>(
+  private generateRandomId(): number {
+    return Math.floor(Math.random() * 1000);
+  }
+  getDraftsByAuthor(authorId: string): Observable<Article[]> {
+    return this.http.get<Article[]>(
       `${this.articleUrl}?authorId=${authorId}&status=draft`
     );
   }

@@ -6,7 +6,6 @@ import { MenucardComponent } from './menucard/menucard.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './screens/login/login.component';
 import { CreatepostComponent } from './screens/createpost/createpost.component';
-import { MyfavouritesComponent } from './screens/myfavourites/myfavourites.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +32,6 @@ import { CommentsSidebarComponent } from './comments-sidebar/comments-sidebar.co
     FooterComponent,
     LoginComponent,
     CreatepostComponent,
-    MyfavouritesComponent,
     // FirebaseModule,
     CommonModule,
     CommentsSidebarComponent,

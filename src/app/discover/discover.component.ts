@@ -5,11 +5,12 @@ import { Article } from '../models/Article.model';
 import { User } from '../models/user.model';
 import { ArticleService } from '../services/articleService.service';
 import { UserService } from '../services/user.service';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-discover',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Include FormsModule here
+  imports: [CommonModule, FormsModule, RouterModule], // Include FormsModule here
   templateUrl: './discover.component.html',
   styleUrls: ['./discover.component.scss'],
 })

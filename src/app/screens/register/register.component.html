@@ -24,14 +24,14 @@
             <div class="mb-3">
                 <label class="form-label">Register as</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="sharedYes" required name="Flat/building Seller"
-                        [(ngModel)]="userDetails.role" [value]="'Seller'" />
-                    <label class="form-check-label" for="sharedYes">Flat/building Seller</label>
+                    <input style="margin-top:5px;" class="form-check-input" type="radio" id="sharedYes" required
+                        name="Flat/building Seller" [(ngModel)]="userDetails.role" [value]="'reader'" />
+                    <label class="form-check-label" for="sharedYes">Reader</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="sharedNo" required name="Flat/building Buyer"
-                        [(ngModel)]="userDetails.role" [value]="'Buyer'" />
-                    <label class="form-check-label" for="sharedNo">Flat/building Buyer</label>
+                    <input style="margin-top:5px;" class="form-check-input" type="radio" id="sharedNo" required
+                        name="Flat/building Buyer" [(ngModel)]="userDetails.role" [value]="'author'" />
+                    <label class="form-check-label" for="sharedNo">Author</label>
                 </div>
             </div>
 

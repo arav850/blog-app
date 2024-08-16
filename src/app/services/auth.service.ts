@@ -31,8 +31,8 @@ export class AuthService {
       .createUserWithEmailAndPassword(userDetails.email, userDetails.password)
       .then(
         (res) => {
-          // alert('Firebase registration successful');
-          // console.log(res);
+          alert('Firebase registration successful');
+          console.log(res);
         },
         (err) => {
           console.log('Firebase registration error:', err);
@@ -105,7 +105,6 @@ export class AuthService {
         const user = res.find(
           (a: User) => a.email === data.email && a.password === data.password
         );
-
         return user || null;
       }),
       catchError((error) => {

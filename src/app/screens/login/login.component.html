@@ -53,20 +53,23 @@
                 <button [disabled]="!form.valid || form.untouched" class="btn btn-primary" style="width: 150px;"
                     type="submit">Login</button>
             </div>
-            <div class="col-12" style="display:flex">
+            <div class="col-12" style="display:flex; margin-bottom: 30px;">
                 <p>New User? </p>
                 &nbsp;&nbsp;<a href="/register" style="color:#0085fc; text-decoration:none">Register</a>
             </div>
+            <button (click)="googleSignIn()" id="google-login-button" class="btn"
+                style="width: 250px; height: 50px; border: 1px solid #dcdcdc; background-color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);">
+
+                <!-- Font Awesome Google Icon -->
+                <i class="fab fa-google" style="color: #4285F4; font-size: 20px; margin-right: 10px;"></i>
+
+                <!-- Button Text -->
+                <span style="color: #757575; font-weight: bold; font-size: 16px;">Sign in with Google</span>
+            </button>
         </div>
 
     </form>
-    <div class="col-12" style="display: flex;">
-        <button (click)="googleSignIn()" id="google-login-button" class="btn btn-primary" style="width: 150px;"
-            type="submit">
-            Google SignIn
-        </button>
-
-
+    <div style="margin-left: 300px;" class="col-12" style="display: flex;align-items: center;">
 
     </div>
 </div>

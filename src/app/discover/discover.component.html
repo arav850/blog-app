@@ -29,13 +29,11 @@
             <div style="display: flex;justify-content: center; margin-top: 30px;">
                 <span>Trending Keywords:</span>&nbsp;&nbsp;
                 <span class="badge rounded-pill text-bg-light" style="border:1px solid black">#Popular</span>
-
             </div>
         </div>
         <div class="row">
             <div class="col-md-4"></div>
         </div>
-
     </div>
     <div class="container" style="margin-bottom: 50px;"></div>
     <div class="row">
@@ -52,11 +50,17 @@
                                     <div class="row">
                                         <div class="card col-md-2" style="margin: .5rem;height:500px;width: 250px;"
                                             *ngFor="let article of articles | slice: 0:4">
-                                            <img [src]="article.thumbnail" class="card-img-top" alt="Article thumbnail">
+                                            <img style="height:250px" [src]="article.thumbnail" class="card-img-top"
+                                                alt="Article thumbnail">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{ article.title }}</h5>
-                                                <p class="card-text">{{ article.description | slice:0:100 }}...</p>
+                                                <h5 class="card-title">{{ article.title | slice:0:50 }}</h5>
+                                                <p class="card-text">{{ article.description | slice:0:50 }}...</p>
+                                                <a style="width: 150px;display: flex;justify-content: center;align-items: center;"
+                                                    [routerLink]="['/viewarticle', article.id]"
+                                                    class="btn btn-primary">ReadMore</a>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -69,23 +73,32 @@
                                                 <h5 class="card-title">{{ article.title }}</h5>
                                                 <p class="card-text">{{ article.description | slice:0:100 }}...</p>
                                             </div>
+                                            <a [routerLink]="['/viewarticle', article.id]">Read More</a>
+
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Add more carousel items as needed -->
                             </div>
                             <!-- Carousel Controls -->
-                            <button style="margin-right:300px" class="carousel-control-prev" type="button"
+                            <button style="margin-right: 300px;" class="carousel-control-prev" type="button"
                                 data-bs-target="#carouselExample" data-bs-slide="prev">
-                                <span style="width: 100px; height:100px;background-color:black;border-radius: 50%;"
+                                <span style="width: 100px; height: 100px; background-color: black; border-radius: 50%;"
                                     class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span style="color: black; font-size: 5rem;">></span>
+                                <span style="color: black; font-size: 5rem;">
+
+                                </span>
                             </button>
+
                             <button style="color: black;" class="carousel-control-next" type="button"
                                 data-bs-target="#carouselExample" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span>></span>
+                                <span style="width: 100px; height: 100px; background-color: black; border-radius: 50%;"
+                                    class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span style="color: black; font-size: 5rem;">
+
+                                </span>
                             </button>
+
                         </div>
                     </div>
                 </div>
