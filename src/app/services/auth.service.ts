@@ -6,6 +6,7 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 // import { FirebaseService } from './firebase.service';
 import {
+  fetchSignInMethodsForEmail,
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
@@ -48,14 +49,15 @@ export class AuthService {
     );
   }
   registerUser(userDetails: User): Observable<User> {
-    // Registering the user in your local backend
     return this.http.post<User>(this.apiUrl, userDetails).pipe(
-      catchError((error) => {
-        console.error('Error creating user', error);
-        return throwError(() => new Error('Error creating user'));
+      catchError((e) => {
+        console.error('Error:', e);
+        // Rethrow the error so that the caller can handle it
+        return throwError(() => e);
       })
     );
   }
+
   signInWithGoogle(): Observable<User> {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
@@ -63,35 +65,68 @@ export class AuthService {
     return new Observable<User>((observer) => {
       signInWithPopup(auth, provider)
         .then((result) => {
-          const user = result.user;
+          const firebaseUser = result.user;
+          const email = firebaseUser.email || '';
 
-          // Create a User object without a password
-          const newUser: User = {
-            id: null,
-            userId: user.uid,
-            fullName: user.displayName || '',
-            email: user.email || '',
-            password: '123456', // Password is left empty
-            role: 'author', // Default role, modify if needed
-            favourites: [],
-            views: 0,
-          };
+          // Step 1: Check if the user exists in Firebase
+          fetchSignInMethodsForEmail(auth, email)
+            .then((signInMethods) => {
+              if (signInMethods.length > 0) {
+                // User already exists in Firebase
+                const existingUser: User = {
+                  id: null, // or any default value
+                  userId: firebaseUser.uid,
+                  fullName: firebaseUser.displayName || '',
+                  email: email,
+                  password: '123456', // password can be left blank or set to a default value
+                  role: 'reader', // Default role
+                  favourites: [],
+                  views: 0,
+                };
+                observer.next(existingUser);
+                observer.complete();
+              } else {
+                // User does not exist in Firebase, proceed to create a new user
+                const newUser: User = {
+                  id: null,
+                  userId: firebaseUser.uid,
+                  fullName: firebaseUser.displayName || '',
+                  email: email,
+                  password: '123456', // Set a default password
+                  role: 'reader', // Default role
+                  favourites: [],
+                  views: 0,
+                };
 
-          // Store user details in the JSON server
-          this.registerUser(newUser).subscribe({
-            next: (registeredUser) => {
-              observer.next(registeredUser);
-              observer.complete();
-            },
-            error: (err) => {
-              observer.error(err);
-            },
-          });
+                // Store user details in the JSON server
+                this.registerUser(newUser).subscribe({
+                  next: (registeredUser) => {
+                    observer.next(registeredUser);
+                    observer.complete();
+                  },
+                  error: (err) => {
+                    observer.error(
+                      'Error registering user in JSON server: ' + err.message
+                    );
+                  },
+                });
+              }
+            })
+            .catch((error) => {
+              observer.error('Error checking Firebase user: ' + error.message);
+            });
         })
         .catch((error) => {
-          // observer.error(error);
+          observer.error('Google Sign-In Error: ' + error.message);
         });
     });
+  }
+
+  // Example method to get a user by email from the JSON server
+  getUserByEmail(email: string): Observable<User | null> {
+    return this.http
+      .get<User[]>(`http://localhost:3000/createUser?email=${email}`)
+      .pipe(map((users) => (users.length > 0 ? users[0] : null)));
   }
 
   setLoginStatus(status: boolean) {

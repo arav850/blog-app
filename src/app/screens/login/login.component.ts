@@ -45,13 +45,15 @@ export class LoginComponent {
           const userDetails = JSON.stringify(user);
           this.cookie.set('userDetails', userDetails);
           this.router.navigate(['']);
-          console.log(user);
-
+          console.log('User registered:', user);
           // Navigate to another page or update the UI as needed
         }
       },
       error: (err) => {
-        console.error('Google Sign-In Error:', err);
+        if (err) {
+          console.error('Google Sign-In Error:', err);
+          alert(err); // Display the error message returned from the service
+        }
       },
     });
   }

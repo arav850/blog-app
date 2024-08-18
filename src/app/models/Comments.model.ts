@@ -1,6 +1,8 @@
 export class Comments {
   id: string;
+  userId: string;
   articleId: string;
+  userName: string;
   author: string;
   text: string;
   replies: Comments[];
@@ -10,6 +12,8 @@ export class Comments {
 
   constructor() {
     this.id = '';
+    this.userId = '';
+    this.userName = '';
     this.articleId = '';
     this.author = '';
     this.text = '';

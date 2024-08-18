@@ -41,54 +41,6 @@
       "favourites": []
     },
     {
-      "id": null,
-      "userId": "pbGIl631sgPQ7RYbYZZmijmAXzI3",
-      "fullName": "Aravind Redlam",
-      "email": "aravindredlam345@gmail.com",
-      "password": "123456",
-      "role": "reader",
-      "favourites": []
-    },
-    {
-      "id": null,
-      "userId": "pbGIl631sgPQ7RYbYZZmijmAXzI3",
-      "fullName": "Aravind Redlam",
-      "email": "aravindredlam345@gmail.com",
-      "password": "123456",
-      "role": "user",
-      "favourites": []
-    },
-    {
-      "id": null,
-      "userId": "UFdgC4ylNSXN4frDrYJvlNZv0G03",
-      "fullName": "Aravind Redlam",
-      "email": "aravindredlam345@gmail.com",
-      "password": "123456",
-      "role": "author",
-      "favourites": [],
-      "views": 0
-    },
-    {
-      "id": null,
-      "userId": "BwzWX4E0qaSQYdhMHWYE9DpN89J3",
-      "fullName": "Aravind Redlam",
-      "email": "aravindredlam345@gmail.com",
-      "password": "123456",
-      "role": "author",
-      "favourites": [],
-      "views": 0
-    },
-    {
-      "id": null,
-      "userId": "MpEmyEyhbegUrMgpkWV76LT2HS73",
-      "fullName": "Aravind Redlam",
-      "email": "aravindredlam345@gmail.com",
-      "password": "123456",
-      "role": "author",
-      "favourites": [],
-      "views": 0
-    },
-    {
       "id": "",
       "userId": "239",
       "fullName": "aravind",
@@ -127,6 +79,36 @@
       "role": "author",
       "favourites": [],
       "views": 0
+    },
+    {
+      "id": null,
+      "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+      "fullName": "Aravind Redlam",
+      "email": "aravindredlam345@gmail.com",
+      "password": "123456",
+      "role": "reader",
+      "favourites": [],
+      "views": 0
+    },
+    {
+      "id": null,
+      "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+      "fullName": "Aravind Redlam",
+      "email": "aravindredlam345@gmail.com",
+      "password": "123456",
+      "role": "reader",
+      "favourites": [],
+      "views": 0
+    },
+    {
+      "id": null,
+      "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+      "fullName": "Aravind Redlam",
+      "email": "aravindredlam345@gmail.com",
+      "password": "123456",
+      "role": "reader",
+      "favourites": [],
+      "views": 0
     }
   ],
   "userList": [
@@ -139,74 +121,89 @@
   ],
   "Comments": [
     {
-      "id": "ebe9",
-      "postId": "381",
-      "author": "Buyer2",
-      "text": "I'm intrested to $1000 for 2years",
-      "replies": [],
-      "likes": null
-    },
-    {
-      "id": "",
-      "postId": "",
-      "author": "",
-      "text": "22",
-      "replies": [],
-      "date": "2024-08-14T13:04:30.022Z",
-      "likes": 0
-    },
-    {
-      "id": "",
-      "articleId": "",
-      "author": "",
-      "text": "good",
-      "replies": [],
-      "date": "2024-08-16T04:24:15.320Z",
-      "likes": 0
-    },
-    {
-      "id": "",
-      "articleId": "55",
-      "author": "",
-      "text": "good too",
-      "replies": [],
-      "date": "2024-08-16T04:26:57.748Z",
-      "likes": 0
-    },
-    {
-      "id": "",
+      "id": "906",
+      "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
       "articleId": "543",
+      "userName": "Aravind Redlam",
       "author": "",
-      "text": "yes",
-      "replies": [],
-      "date": "2024-08-16T04:46:36.971Z",
-      "likes": 0
+      "text": "hii",
+      "replies": [
+        {
+          "id": "982",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "text": "hii",
+          "replies": [],
+          "date": "2024-08-18T15:59:31.580Z",
+          "likes": 0
+        },
+        {
+          "id": "56",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "text": "",
+          "replies": [],
+          "date": "2024-08-18T15:59:54.960Z",
+          "likes": 0
+        },
+        {
+          "id": "739",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "replies": [],
+          "date": "2024-08-18T16:03:01.645Z",
+          "likes": 0
+        },
+        {
+          "id": "901",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "replies": [],
+          "date": "2024-08-18T16:03:37.285Z",
+          "likes": 0
+        },
+        {
+          "id": "786",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "replies": [],
+          "date": "2024-08-18T16:04:17.996Z",
+          "likes": 0
+        },
+        {
+          "id": "33",
+          "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
+          "articleId": "543",
+          "userName": "Aravind Redlam",
+          "author": "",
+          "replies": [],
+          "date": "2024-08-18T16:04:36.964Z",
+          "likes": 0
+        }
+      ],
+      "date": "2024-08-18T15:59:18.277Z",
+      "likes": 0,
+      "showReplies": true
     },
     {
-      "id": "",
+      "id": "920",
+      "userId": "HT8YKMROHFQ6F9FLG61gKND3kOh2",
       "articleId": "543",
+      "userName": "Aravind Redlam",
       "author": "",
-      "text": "okay",
+      "text": "good\n",
       "replies": [],
-      "date": "2024-08-16T12:38:18.335Z",
-      "likes": 0
-    },
-    {
-      "id": "",
-      "articleId": "",
-      "author": "",
-      "text": "comment1",
-      "replies": [],
-      "date": "2024-08-16T12:46:50.694Z",
-      "likes": 0
-    },
-    {
-      "id": "",
-      "articleId": "543",
-      "author": "",
-      "text": "comment 1 reply1",
-      "replies": [],
-      "date": "2024-08-16T12:48:03.893Z",
+      "date": "2024-08-18T16:07:08.444Z",
       "likes": 0
     }
   ],

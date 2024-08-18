@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Correct import
 import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Comments } from '../models/Comments.model';
 import { CommentService } from '../services/commentsService.service';
+
 @Component({
   selector: 'comments-sidebar',
   standalone: true,
@@ -20,7 +22,8 @@ export class CommentsSidebarComponent {
 
   constructor(
     private commentService: CommentService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    public cookie: CookieService
   ) {}
 
   ngOnInit() {
@@ -34,26 +37,44 @@ export class CommentsSidebarComponent {
     this.route.paramMap.subscribe((params) => {
       this.articleId = params.get('id') ?? '';
     });
-
+    const userDetails = JSON.parse(this.cookie.get('userDetails'));
+    this.newComment.userName = userDetails.fullName;
+    this.newComment.userId = userDetails.userId;
+    this.newComment.id = String(this.generateRandomId());
+    this.newComment.articleId = this.articleId;
     this.commentService.postComment(this.newComment).subscribe((data) => {
       this.loadComments();
       this.newComment = new Comments();
     });
   }
 
+  private generateRandomId(): number {
+    return Math.floor(Math.random() * 1000);
+  }
+
   replyToComment(parentComment: Comments) {
-    if (this.articleId) {
+    console.log(parentComment);
+
+    if (parentComment.text != null) {
       const reply: Comments = new Comments();
       reply.text = this.replyText[parentComment.id];
       reply.articleId = this.articleId;
+      reply.userId = JSON.parse(this.cookie.get('userDetails')).userId;
+      reply.userName = JSON.parse(this.cookie.get('userDetails')).fullName;
+      reply.id = String(this.generateRandomId());
       reply.replies = [];
-      parentComment.replies.push(reply);
-      this.commentService.postComment(reply).subscribe(() => {
+      reply.date = new Date();
+      reply.likes = 0;
+
+      parentComment.replies.push(reply); // Push reply to the parent comment's replies array
+
+      this.commentService.updateComment(parentComment).subscribe(() => {
         this.loadComments();
         this.replyText[parentComment.id] = ''; // Reset reply text
       });
     } else {
-      console.error('Article ID is null.');
+      alert('comment shoudnot be null.');
+      console.error('comment shoudnot be null.');
     }
   }
 
