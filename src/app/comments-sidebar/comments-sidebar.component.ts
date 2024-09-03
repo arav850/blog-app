@@ -62,7 +62,6 @@ export class CommentsSidebarComponent {
   }
 
   replyToComment(parentComment: Comments) {
-    console.log(parentComment);
     if (parentComment.text != null) {
       const reply: Comments = new Comments();
       reply.text = this.replyText[parentComment.id];

@@ -205,6 +205,30 @@
       "replies": [],
       "date": "2024-08-18T16:07:08.444Z",
       "likes": 0
+    },
+    {
+      "id": "371",
+      "userId": "885",
+      "articleId": "894",
+      "userName": "author",
+      "author": "",
+      "text": "hi readers",
+      "replies": [
+        {
+          "id": "404",
+          "userId": "885",
+          "articleId": "894",
+          "userName": "author",
+          "author": "",
+          "text": "test",
+          "replies": [],
+          "date": "2024-09-03T05:19:44.875Z",
+          "likes": 0
+        }
+      ],
+      "date": "2024-09-03T05:19:00.396Z",
+      "likes": 0,
+      "showReplies": true
     }
   ],
   "articles": [
