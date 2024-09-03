@@ -35,9 +35,7 @@ import { CommentsSidebarComponent } from './comments-sidebar/comments-sidebar.co
     // FirebaseModule,
     CommonModule,
     CommentsSidebarComponent,
-
     // AngularFireModule.initializeApp(environment.firebaseConfig),
-
     // FirebaseModule,
     // ToastrModule,
     // BrowserAnimationsModule,

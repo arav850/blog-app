@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Correct import
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Comments } from '../models/Comments.model';
@@ -9,7 +9,7 @@ import { CommentService } from '../services/commentsService.service';
 @Component({
   selector: 'comments-sidebar',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Correct usage here
+  imports: [CommonModule, FormsModule],
   templateUrl: './comments-sidebar.component.html',
   styleUrls: ['./comments-sidebar.component.scss'],
 })
@@ -25,15 +25,24 @@ export class CommentsSidebarComponent {
     public route: ActivatedRoute,
     public cookie: CookieService
   ) {}
-
+  isLoggedIn: boolean = false;
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.articleId = params.get('id') ?? '';
       this.loadComments();
     });
+    //to disable the input field of (postcomment)
+    this.checkUserLogin();
   }
-
+  checkUserLogin() {
+    const userDetails = this.cookie.get('userDetails');
+    this.isLoggedIn = !!userDetails; // Check if user details are present
+  }
   postComment() {
+    if (!this.isLoggedIn) {
+      alert('Login to give comment');
+      return;
+    }
     this.route.paramMap.subscribe((params) => {
       this.articleId = params.get('id') ?? '';
     });
@@ -48,13 +57,12 @@ export class CommentsSidebarComponent {
     });
   }
 
-  private generateRandomId(): number {
+  generateRandomId(): number {
     return Math.floor(Math.random() * 1000);
   }
 
   replyToComment(parentComment: Comments) {
     console.log(parentComment);
-
     if (parentComment.text != null) {
       const reply: Comments = new Comments();
       reply.text = this.replyText[parentComment.id];
@@ -65,7 +73,6 @@ export class CommentsSidebarComponent {
       reply.replies = [];
       reply.date = new Date();
       reply.likes = 0;
-
       parentComment.replies.push(reply); // Push reply to the parent comment's replies array
 
       this.commentService.updateComment(parentComment).subscribe(() => {

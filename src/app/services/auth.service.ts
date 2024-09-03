@@ -61,7 +61,6 @@ export class AuthService {
   signInWithGoogle(): Observable<User> {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
-
     return new Observable<User>((observer) => {
       signInWithPopup(auth, provider)
         .then((result) => {

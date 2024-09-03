@@ -85,7 +85,6 @@ export class CreatearticleComponent implements OnInit {
       this.articleData.status = 'published';
       this.articleService.updateArticle(this.articleData).subscribe(
         (response) => {
-          console.log('article updated successfully', response);
           this.router.navigate(['/']);
           return;
         },

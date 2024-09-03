@@ -16,7 +16,7 @@ export class CommentService {
   }
 
   getComments(postId: string): Observable<Comments[]> {
-    return this.http.get<Comments[]>(`${this.apiUrl}?postId=${postId}`);
+    return this.http.get<Comments[]>(`${this.apiUrl}?articleId=${postId}`);
   }
 
   updateComment(comment: Comments): Observable<Comments> {

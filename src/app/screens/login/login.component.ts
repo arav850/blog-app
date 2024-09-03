@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../models/user.model';
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,14 +22,12 @@ export class LoginComponent {
   constructor() {
     this.isUserlogin = false;
   }
-
   loginForm() {
     this.login.findUser(this.userDetails).subscribe((user: User | null) => {
       if (user) {
         if (user.userId) {
-          //to store obj to string formate use jsonstringify syntax
+          //to store obj to string format use jsonstringify syntax
           this.cookie.set('userDetails', JSON.stringify(user));
-          console.log(user);
         }
         this.router.navigate(['']);
       } else {
@@ -46,13 +43,12 @@ export class LoginComponent {
           this.cookie.set('userDetails', userDetails);
           this.router.navigate(['']);
           console.log('User registered:', user);
-          // Navigate to another page or update the UI as needed
         }
       },
       error: (err) => {
         if (err) {
           console.error('Google Sign-In Error:', err);
-          alert(err); // Display the error message returned from the service
+          alert(err);
         }
       },
     });

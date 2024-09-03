@@ -60,12 +60,14 @@ export class DiscoverComponent {
   }
 
   onSearch() {
-    console.log(this.selectedFilter);
+    //console.log(this.selectedFilter);
 
     if (this.selectedFilter === 'Article') {
+      console.log('insideif');
       this.articles = this.articles.filter((article) =>
         article.title.toLowerCase().includes(this.searchText.toLowerCase())
       );
+      console.log(this.articles);
     } else if (this.selectedFilter === 'Author') {
       this.authorsList = this.authorsList.filter((author) =>
         author.fullName.toLowerCase().includes(this.searchText.toLowerCase())
