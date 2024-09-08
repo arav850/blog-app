@@ -113,17 +113,20 @@
         <div style="margin:2rem">
             <h3>Rising Authors </h3>
             <p style="margin-bottom: 15px;"></p>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <span class="badge rounded-pill text-bg-light"
-                    style="border:1px solid black; width:100px">#Popular</span>
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's
-                        content.</p>
+            <div style="display: flex;">
+                <div *ngFor="let author of authorsList">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <span class="badge rounded-pill text-bg-light"
+                            style="border:1px solid black; width:100px">#Popular</span>
+                        <div class="card-body">
+                            <p class="card-text"> {{author.fullName}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
             <!-- </div> -->
         </div>
     </div>

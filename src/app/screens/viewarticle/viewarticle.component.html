@@ -29,8 +29,8 @@
             <!-- Image/Icon -->
 
             <div>
-                <h6 class="mb-0">Benjamin Foster</h6>
-                <small class="text-muted">4 min read</small>
+                <h6 class="mb-0">{{ article?.authorName }}</h6>
+                <small class="text-muted">{{readTime}}</small>
             </div>
             <a class="ml-auto" style="text-decoration:none;">Follow</a>
         </div>
@@ -44,7 +44,7 @@
         </div>
         <p class="post_text">Post By : {{ article?.publishDate }}</p>
         <p class="lorem_text">
-            {{ article?.description }}...
+            {{ article?.description }}
             <!-- <a [routerLink]="['/article', article.id]">Read More</a> -->
         </p>
         <div class="flex-jcs">
@@ -71,7 +71,7 @@
                 <div class="card" style="width: 18rem;">
                     <img [src]="relatedArticle.image" class="card-img-top" alt="Article image">
                     <div class="card-body">
-                        <h5 class="card-title">{{ relatedArticle?.title }}</h5>
+                        <h5 class="card-title">{{ relatedArticle?.title|slice:0:70 }}..</h5>
                         <p class="card-text">{{ relatedArticle?.description |slice:0:100 }}...</p>
                         <a [routerLink]="['/viewarticle', relatedArticle.id]" class="btn btn-primary">Read More</a>
                     </div>

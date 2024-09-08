@@ -22,6 +22,7 @@ import { CommentsSidebarComponent } from '../../comments-sidebar/comments-sideba
 export class ViewarticleComponent {
   public articleId: string | null = null;
   postId: string | null = null;
+  readTime: string = '';
   article: Article | undefined;
   relatedArticles: Article[] = [];
   displayComments: Boolean = false;
@@ -42,6 +43,7 @@ export class ViewarticleComponent {
               if (article.image) {
                 article.image = this.convertBase64ToImage(article.image);
               }
+              this.readTime = this.calculateReadTime(this.article.description);
               this.fetchRelatedArticles(article.category); // Fetch related articles
             }
             // console.log(article);
@@ -108,4 +110,11 @@ export class ViewarticleComponent {
   // }
   // });
   // }
+  calculateReadTime(content: string): string {
+    const wordsPerMinute = 100; // Average reading speed
+    const wordCount = content.split(' ').length; // Count the number of words
+    const minutes = Math.ceil(wordCount / wordsPerMinute); // Calculate the read time in minutes
+
+    return `${minutes} min read`;
+  }
 }

@@ -27,6 +27,7 @@ export class CreatearticleComponent implements OnInit {
 
   ngOnInit() {
     this.userdetails = JSON.parse(this.cookie.get('userDetails'));
+
     this.articleService.getDraftsByAuthor(this.userdetails.userId).subscribe(
       (drafts) => {
         this.drafts = drafts.filter((item) => item.status === 'draft');
@@ -65,6 +66,7 @@ export class CreatearticleComponent implements OnInit {
   updateDraft() {
     this.articleData.status = 'draft';
     this.articleData.authorId = this.userdetails.userId;
+
     console.log(this.articleData);
     // if (!this.articleData.id) {
     //   this.articleData.id = String(this.generateRandomId());
@@ -83,6 +85,7 @@ export class CreatearticleComponent implements OnInit {
   createArticle() {
     if (this.articleData.status === 'draft') {
       this.articleData.status = 'published';
+      this.articleData.authorName = this.userdetails.fullName;
       this.articleService.updateArticle(this.articleData).subscribe(
         (response) => {
           this.router.navigate(['/']);
@@ -96,6 +99,7 @@ export class CreatearticleComponent implements OnInit {
     } else if (this.articleData.status === '' && !this.articleData.id) {
       this.articleData.status = 'published';
       this.articleData.authorId = this.userdetails.userId;
+      this.articleData.authorName = this.userdetails.fullName;
       this.articleData.id = String(this.generateRandomId());
 
       this.articleService.createPost(this.articleData).subscribe({
